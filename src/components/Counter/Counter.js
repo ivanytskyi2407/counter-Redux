@@ -1,28 +1,32 @@
 import { connect } from 'react-redux';
 import * as actions from '../../redux/action';
 
-function Counter({ onIncrement, onDecrement, value }) {
+function Counter({ onIncrement, step, onDecrement, value }) {
   return (
     <div>
       <span>{value}</span>
-      <button type="button" onClick={onIncrement}>
-        +1
+      <button type="button" onClick={() => onIncrement(step)}>
+        +{step}
       </button>
-      <button type="button" onClick={onDecrement}>
-        -1
+      <button type="button" onClick={() => onDecrement(step)}>
+        -{step}
       </button>
     </div>
   );
 }
+
 const mapStateToProps = state => {
+  console.log('state', state.counteн);
   return {
-    value: state.counterValue,
+    value: state.counter.value,
+    step: state.counter.step,
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
-    onIncrement: () => dispatch(actions.increment(1)),
-    onDecrement: () => dispatch(actions.decrement(1)),
+    onIncrement: value => dispatch(actions.increment(value)),
+    onDecrement: value => dispatch(actions.decrement(value)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
