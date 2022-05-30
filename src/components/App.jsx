@@ -12,6 +12,7 @@ export const App = () => {
         color: '#010101',
       }}
     >
+      {/* <Counter onIncrement, onDecrement, value/> */}
       <Counter />
     </div>
   );
